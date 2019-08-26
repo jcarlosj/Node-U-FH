@@ -5,14 +5,10 @@ let { getUsuario } = require( './usuarios/usuario' );
  *  Usando Callbacks podemos ejecutar varias acciones de forma simultanea */
 console .log( 'Inicia' );
 
-getUsuario( 1, usuario => {
-    console .log( 'Usuario 1: ', usuario  );
-});
-getUsuario( 2, usuario => {
-    console .log( 'Usuario 2: ', usuario  );
-});
-getUsuario( 3, usuario => {
-    console .log( 'Usuario 3: ', usuario  );
-});
+for( let i = 1; i < 4; i++ ) {
+    getUsuario( i, usuario => {
+        console .log( 'Usuario ' + usuario .id + ': ', usuario  );
+    });
+}
 
 console .log( 'Finaliza' );
