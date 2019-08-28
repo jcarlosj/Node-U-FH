@@ -1,51 +1,52 @@
 /** Repaso JavaScript */
 
-// Definicion del Callback Personalizado
-let getUsuarioByID = ( id, callback ) => {
-    // Simula Obtener datos de la BD
-    let user = {
-        id,                         // En ES6 podemos obviar la asignación tradicional -> id: id,
-        firstName: 'Juliana',
-        lastName: 'Puerta Villada',
-        gender: 'Female'
+let people = new Array(
+    {
+        id: 1,
+        firstName: 'Elisa Maria',
+        lastName: 'Giraldo'
+    },
+    {
+        id: 2,
+        firstName: 'Luisa Maria',
+        lastName: 'Balazar'
+    },
+    {
+        id: 3,
+        firstName: 'Ana Maria',
+        lastName: 'Castro'
     }
+);
 
-    // Simula que el ID pasado no existe
-    if( id === 10 ) {
-        callback( `ERROR: El id ${ id }, no existe en la BD` );
+console .log( people );
+
+// Definicion del Callback personalizado
+let getPeople = ( id, callback ) => {
+    let personDB = people .find( person => person .id === id );
+
+    // console .log( ' personDB ', personDB );
+    if( ! personDB ) {
+        callback( `ERROR: No existe el registro con el ID: ${ id }` );
     }
     else {
-        callback( null, user );  // Pasa los 'datos' obtenidos al 'callback'
+        callback( null, personDB );
+        // callback( null, personDB );
     }
 }
 
-// Llamada al Callback Personalizado con ID 10
-getUsuarioByID( 10, ( err, usuario ) => {
-    // Manejador de Errores
-    if( err ) {                     
-        return console .log( err );
-    }
-    console .log( 'Usuario:', usuario );
+// Llamado del Callback personalizado con ID 1
+getPeople( 1, ( err, person ) => {
+    if( err ) console .log( err );              // Manejador de Errores
+    console .log( person );                     // Despliega el objeto del Array 'people' con 'id' 1
 });
-// Llamada al Callback Personalizado con ID 9
-getUsuarioByID( 9, ( err, usuario ) => {
-    // Manejador de Errores
-    if( err ) {
-        return console .log( err );
-    }
-    console .log( 'Usuario:', usuario );
+// Llamado del Callback personalizado con ID 10
+getPeople( 10, ( err, person ) => {
+    if( err ) console .log( err );              // El manejador despliega el mensaje de error ya que no existe el ID 10
+    console .log( person );
 });
 
-// Callback Nativo de JavaScript
-setTimeout( () => {
-    console .log( ' > Hello!' );
-}, 3000 );
 
 /** NOTAS: 
- *  1.  Se le conoce como Callbacks a funciones que reciben como parámetro(s) otra funcion(es)
- *  2.  setTimeout() es un Callback nativo de JavaScript
- *  3.  Al crear un Callback personalizado podemos usar las funciones clasicas o los Arrow Function
- *  4.  La Funcion en el ejemplo llamada 'callback' puede nombrarse de cualquier otra forma solo se 
- *      uso de referencia para el ejemplo pero esta puede adoptar cualquier nombre ya que NO es una
- *      palabra reservada del lenguaje
+ *  Errores comunes al crear Callbacks personalizados
+ *  1.  Duplicar el llamado del Callback (ver linea 33)
  */
