@@ -77,45 +77,33 @@ let getSalary = ( person ) => {
 // USUARIO QUE NO EXISTE
 // Llamada la funcion que retorna el resultado de una promesa para obtener Persona con ID de usuario 10
 getPeople( 10 ) .then( person => {
-    console .log( ' person ', person );
-
     // Llamado de la funcion para Obtener Salario de la persona
-    getSalary( person ) .then( data => {
-        console .log( `El salario de ${ data .nombre } ${ data .apellido } es de ${ data .salario } usd` );
-    }, err => {                     // Manejador de Errores
-        console .log( err );
-    });
-}, err => {                         // Manejador de Errores
+    return getSalary( person );     // Retorna una Promesa
+}) .then( data => {
+    console .log( `El salario de ${ data .nombre } ${ data .apellido } es de ${ data .salario } usd` );
+}) .catch( err => {                 // Manejador de Errores
     console .log( err );
 });
 
 // USUARIO QUE EXISTE Y TIENE SALARIO ASIGNADO
 // Llamada la funcion que retorna el resultado de una promesa para obtener Persona con ID de usuario 1
 getPeople( 1 ) .then( person => {
-    console .log( ' person ', person );
-
     // Llamado de la funcion para Obtener Salario de la persona
-    getSalary( person ) .then( data => {
-        console .log( `El salario de ${ data .nombre } ${ data .apellido } es de ${ data .salario } usd` );
-    }, err => {                     // Manejador de Errores
-        console .log( err );
-    });
-}, err => {                         // Manejador de Errores
+    return getSalary( person );     // Retorna una Promesa
+}) .then( data => {
+    console .log( `El salario de ${ data .nombre } ${ data .apellido } es de ${ data .salario } usd` );
+}) .catch( err => {                 // Manejador de Errores
     console .log( err );
 });
 
 // USUARIO QUE EXISTE Y NO TIENE SALARIO ASIGNADO
 // Llamada la funcion que retorna el resultado de una promesa para obtener Persona con ID de usuario 3
 getPeople( 3 ) .then( person => {
-    console .log( ' person ', person );
-
     // Llamado de la funcion para Obtener Salario de la persona
-    getSalary( person ) .then( data => {
-        console .log( `El salario de ${ data .nombre } ${ data .apellido } es de ${ data .salario } usd` );
-    }, err => {                     // Manejador de Errores
-        console .log( err );
-    });
-}, err => {                         // Manejador de Errores
+    return getSalary( person );     // Retorna una Promesa
+}) .then( data => {
+    console .log( `El salario de ${ data .nombre } ${ data .apellido } es de ${ data .salario } usd` );
+}) .catch( err => {                 // Manejador de Errores
     console .log( err );
 });
 
