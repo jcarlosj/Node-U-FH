@@ -11,7 +11,8 @@ let getUser1 = () => {
 // Define una funcion Asincrona
 let getUser2 = async() => {
 
-    undefined .age;        // Simulamos error
+    // Inducimos el error (Simulación de Error)
+    throw new Error( 'Edad no definida para este usuario' );     // Personaliza mensaje de Error        
 
     return {
         firstName: 'Juliana',
