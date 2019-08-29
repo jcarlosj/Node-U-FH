@@ -27,8 +27,6 @@ let people = new Array(
     }
 ];
 
-console .log( salaries );
-
 // Funcion que obtiene una persona por ID
 let getPeople = ( id ) => {
     // Definicion de Promesa (Obtener Persona)          
@@ -57,10 +55,6 @@ let getSalary = ( person ) => {
         if( ! salaryDB ) {
             // reject debe llamarse cuando se asume que no cumplio la tarea, fallo, o se produjo un error.
             reject( `ERROR: No se encontro un salario para ${ person .firstName }` );
-            console .log( 'Este mensaje se desplegará a pesar de ser lanzado posterior al resolve, aplica para reject tambien' );
-            reject( `ERROR: No se encontro un salario para ${ person .firstName }` );
-            reject( `ERROR: No se encontro un salario para ${ person .firstName }` );
-            
         }
         else {
             // resolve debe llamarse cuando se asume que cumplio la tarea exitosamente. No se pueden mandar mas de dos argumentos.
@@ -81,9 +75,7 @@ getPeople( 10 ) .then( person => {
     return getSalary( person );     // Retorna una Promesa
 }) .then( data => {
     console .log( `El salario de ${ data .nombre } ${ data .apellido } es de ${ data .salario } usd` );
-}) .catch( err => {                 // Manejador de Errores
-    console .log( err );
-});
+}) .catch( err => console .log( err ) );    // Manejador de Errores
 
 // USUARIO QUE EXISTE Y TIENE SALARIO ASIGNADO
 // Llamada la funcion que retorna el resultado de una promesa para obtener Persona con ID de usuario 1
@@ -92,9 +84,7 @@ getPeople( 1 ) .then( person => {
     return getSalary( person );     // Retorna una Promesa
 }) .then( data => {
     console .log( `El salario de ${ data .nombre } ${ data .apellido } es de ${ data .salario } usd` );
-}) .catch( err => {                 // Manejador de Errores
-    console .log( err );
-});
+}) .catch( err => console .log( err ) );    // Manejador de Errores
 
 // USUARIO QUE EXISTE Y NO TIENE SALARIO ASIGNADO
 // Llamada la funcion que retorna el resultado de una promesa para obtener Persona con ID de usuario 3
@@ -103,9 +93,7 @@ getPeople( 3 ) .then( person => {
     return getSalary( person );     // Retorna una Promesa
 }) .then( data => {
     console .log( `El salario de ${ data .nombre } ${ data .apellido } es de ${ data .salario } usd` );
-}) .catch( err => {                 // Manejador de Errores
-    console .log( err );
-});
+}) .catch( err => console .log( err ) );    // Manejador de Errores
 
 /** NOTAS:
  *  1.  resolve y reject pueden llamarse varias veces pero solo se van a ejecutar una sola vez, a diferencia 
