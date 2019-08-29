@@ -10,6 +10,9 @@ let getUser1 = () => {
 
 // Define una funcion Asincrona
 let getUser2 = async() => {
+
+    undefined .age;        // Simulamos error
+
     return {
         firstName: 'Juliana',
         lastName: 'Puerta Villada'
@@ -25,9 +28,19 @@ let getUser3 = () => {
         });
     });
 }
-
+   
 console .log( ' getUser1 : ', getUser1() );                          // 1er Ejecucion
-getUser2() .then( name => console .log( ' getUser2 > ', name ) );    // 4ta Ejecucion 
-console .log( ' getUser2 : ', getUser2() );                          // 2da Ejecucion
+getUser2() .then( name => { 
+    console .log( ' getUser2 > ', name ); 
+}) .catch( err => {                                                  // 4ta Ejecucion  
+    console .log( 'ERROR Async: ', err );                            // Manejador de ERRORES para Async
+});  
+console .log( ' getUser2 : ', getUser2() );                          // 2da Ejecucion (ERROR)
 getUser3() .then( name => console .log( ' getUser3 > ', name ) );    // 5ta Ejecucion
 console .log( ' getUser3 : ', getUser3() );                          // 3er Ejecucion
+
+/** NOTA:
+ *  El manejador de errores para la definición de una funcion Asincrona (usando async)
+ *  será capaz de identificar cualquier error producido en el cuerpo de la funcion
+ *  (ver funcion getUser2 línea 12)
+ */
