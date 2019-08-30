@@ -28,49 +28,44 @@ let people = new Array(
     }
 ];
 
-// Funcion que obtiene una persona por ID
-let getPeople = ( id ) => {
-    // Definicion de Promesa (Obtener Persona)          
-    return new Promise( ( resolve, reject ) => {        // resolve y reject: son dos callbacks, adicional al que las contiene. Las promesas son una nueva caracteristica del ES6
-        let personDB = people .find( person => person .id === id );
+// Funcion Regresa una Promesa obteniendo una persona por ID
+let getPeople = async ( id ) => {
+    
+    let personDB = people .find( person => person .id === id );
 
-        // console .log( ' personDB ', personDB );
-        if( ! personDB ) {
-            // reject debe llamarse cuando se asume que no cumplio la tarea, fallo, o se produjo un error.
-            reject( `ERROR: No existe el usuario con el ID: ${ id }` );     
-        }
-        else {
-            // resolve debe llamarse cuando se asume que cumplio la tarea exitosamente. No se pueden mandar mas de dos argumentos.
-            resolve( personDB );                                  
-        }
-    });
+    // console .log( ' personDB ', personDB );
+    if( ! personDB ) {
+        throw new Error( `No existe el usuario con el ID: ${ id }` );     
+    }
+    else {
+        return personDB;                                  
+    }
+
 }
 
-// Funcion que Obtiene el salario de una persona
-let getSalary = ( person ) => {
-    // Definicion de Promesa (Obtener Salario de una Persona)
-    return new Promise( ( resolve, reject ) => {
-        let salaryDB = salaries .find( salary => salary .idUser === person .id );
+// Funcion Regresa una Promesa obteniendo el salario de una persona
+let getSalary = async ( person ) => {
+    
+    let salaryDB = salaries .find( salary => salary .idUser === person .id );
 
-        // console .log( ' salaryDB ', salaryDB );
-        if( ! salaryDB ) {
-            // reject debe llamarse cuando se asume que no cumplio la tarea, fallo, o se produjo un error.
-            reject( `ERROR: No se encontro un salario para ${ person .firstName }` );
-        }
-        else {
-            // resolve debe llamarse cuando se asume que cumplio la tarea exitosamente. No se pueden mandar mas de dos argumentos.
-            resolve({           
-                id: person .id,
-                nombre: person .firstName,
-                apellido: person .lastName,
-                salario: salaryDB .value
-            });       
-        }
-    });
+    // console .log( ' salaryDB ', salaryDB );
+    if( ! salaryDB ) {
+        throw new Error( `No se encontro un salario para ${ person .firstName }` );
+    }
+    else {
+        return {           
+            id: person .id,
+            nombre: person .firstName,
+            apellido: person .lastName,
+            salario: salaryDB .value
+        };       
+    }
 }
 
 let getInfo = async ( id ) => {
-    let person = await getPeople( id ),       // 
+    
+    // Asumiendo que todos los resultados son los esperados
+    let person = await getPeople( id ),       
         data = await getSalary( person );
     
     return `El salario de ${ data .nombre } ${ data .apellido } es de ${ data .salario } usd`;
