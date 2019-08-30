@@ -1,18 +1,14 @@
 /** Bases de Node */
+// Importa nuestro archivo 
+const { crearArchivo } = require( './lib/multiply' );       // Destructuracion {}
 
-// Importamos las librerias nativas de Node
-const fs = require( 'fs' );
+var base = 7;
 
-var base = 9,
-    data = `Tabla del ${ base }\n\n`;
+console .log( 'Module', module );       // module: Objeto Global que esta disponible durante toda la aplicacion
 
-for( let i = 1; i <= 10; i++ ) {
-    data += `${ base } * ${ i } = ${ base * i }\n`;
-    console .log( data );
-}
-
-// Crea o Escribe un Archivo (El directorio 'tablas' debe estar creado)
-fs .writeFile( `./tablas/tabla-del-${ base }.txt`, data, ( err ) => {
-    if ( err ) throw err;
-    console .log( `El archivo tabla-del-${ base }.txt a sido creado y guardado!` );
-});
+// Llama la funcion que retorna una Promesa
+crearArchivo( base )
+    .then( file => {
+        console .log( `El archivo ${ file } a sido creado y guardado!` );
+    })
+    .catch( err => console .log( err) );
