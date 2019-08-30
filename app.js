@@ -2,9 +2,9 @@
 // Importa nuestro archivo 
 const { crearArchivo } = require( './lib/multiply' );       // Destructuracion {}
 
-var base = 7;
+var base = 'abc';
 
-console .log( 'Module', module );       // module: Objeto Global que esta disponible durante toda la aplicacion
+//console .log( 'Module', module );       // module: Objeto Global que esta disponible durante toda la aplicacion
 
 // Llama la funcion que retorna una Promesa
 crearArchivo( base )
