@@ -1,47 +1,63 @@
 /** Repaso JavaScript */
 
-// Define una funcion Corriente o Sincrona
-let getUser1 = () => {
-    return {
-        firstName: 'Juliana',
-        lastName: 'Puerta Villada'
-    }
-}
-
 // Define una funcion Asincrona
 let getUser2 = async() => {
-
-    // Inducimos el error (Simulación de Error)
-    throw new Error( 'Edad no definida para este usuario' );     // Personaliza mensaje de Error        
-
-    return {
-        firstName: 'Juliana',
-        lastName: 'Puerta Villada'
-    }
+        
+    setTimeout( () => {
+        return {
+            firstName: 'Juliana',
+            lastName: 'Puerta Villada'
+        }
+    }, 3000 );
 }
+
+getUser2() .then( name => {                     // 2da en Ejecutarse, espera la finalización de la Promesa
+    console .log( ' getUser2 > ', name );       // Retorna undefined
+}) .catch( err => {                                                  
+    console .log( 'ERROR Async: ', err );       // Manejador de ERRORES para Async
+});  
+
+console .log( ' getUser2 : ', getUser2() );     // 1ra en Ejecutarse: Retorna Promesa con valores undefined      
+
+
 
 // Define una funcion que retorna una promesa (Equivale a Definir una funcion Asincrona)
 let getUser3 = () => {
     return new Promise( ( resolve, reject ) => {
-        resolve({
-            firstName: 'Juliana',
-            lastName: 'Puerta Villada'
-        });
+
+        setTimeout( () => {
+            resolve({
+                firstName: 'Juliana',
+                lastName: 'Puerta Villada'
+            });
+        }, 3000 );
+
     });
 }
-   
-console .log( ' getUser1 : ', getUser1() );                          // 1er Ejecucion
-getUser2() .then( name => { 
-    console .log( ' getUser2 > ', name ); 
-}) .catch( err => {                                                  // 4ta Ejecucion  
-    console .log( 'ERROR Async: ', err );                            // Manejador de ERRORES para Async
+
+getUser3() .then( name => {                     // 4ta en Ejecutarse, espera la finalización de la Promesa
+    console .log( ' getUser3 > ', name );       // Retorna { firstName: 'Juliana', lastName: 'Puerta Villada' } 
+}) .catch( err => {                                                  
+    console .log( 'ERROR Async: ', err );       // Manejador de ERRORES para Async
 });  
-console .log( ' getUser2 : ', getUser2() );                          // 2da Ejecucion (ERROR)
-getUser3() .then( name => console .log( ' getUser3 > ', name ) );    // 5ta Ejecucion
-console .log( ' getUser3 : ', getUser3() );                          // 3er Ejecucion
+
+// Se ejecuta PRIMERO
+console .log( ' getUser3 : ', getUser3() );     // 1ra en Ejecutarse: Retorna Promesa con valores pendientes      
 
 /** NOTA:
- *  El manejador de errores para la definición de una funcion Asincrona (usando async)
- *  será capaz de identificar cualquier error producido en el cuerpo de la funcion
- *  (ver funcion getUser2 línea 12)
+ *  1.  Todas las promesas son en si mismas funciones asincronas y viceversa, por lo que requieren
+ *      finalizar la accion para las que fueron programadas y retornar los valores esperados.
+ *  2.  Sin embargo en este ejemplo podemos ver que solo las funciones que retornan Promesas devuelven
+ *      los datos esperados (ver linea 39), a diferencia de las funciones asincronas que devuelven  
+ *      valores indefinidos, Promesas con valores indefinidos o pendientes ( ver lineas 15, 20 y 45 )
+ *  3.  Una Promesa siempre debe usar la estructura then().catch() para obtener sus valores y manejar 
+ *      sus errores y se recomienda hacer lo mismo para las funciones declaradas como asincronas con 
+ *      la palabra reservada async:
+ * 
+ *      let mifuncion = async function() { ... }
+ * 
+ *      o 
+ * 
+ *      let mifuncion = async() => { ... }
+ *  
  */
