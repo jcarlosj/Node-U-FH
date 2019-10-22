@@ -18,9 +18,12 @@ const argv = require( 'yargs' )
                     .argv,
       { crearArchivo } = require( './lib/multiply' );       // Destructuracion {}
 
+/** Mensajes Consola */
 console .group( 'argv yargs', argv );
-console .info( 'base', argv .base );
-console .info( 'limite', argv .limite );
+console .info( ' > base', argv .base );
+console .info( ' > b', argv .b );
+console .info( ' > limite', argv .limite );
+console .info( ' > l', argv .l );
 console .groupEnd();
 
 // Llama la funcion que retorna una Promesa
