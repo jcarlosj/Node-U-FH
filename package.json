@@ -22,7 +22,9 @@
     "url": "https://github.com/jcarlosj/Node-U-FH/issues"
   },
   "homepage": "https://github.com/jcarlosj/Node-U-FH#readme",
-  "dependencies": {},
+  "dependencies": {
+    "yargs": "^14.2.0"
+  },
   "devDependencies": {
     "nodemon": "^1.19.4"
   }
