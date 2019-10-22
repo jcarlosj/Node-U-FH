@@ -1,0 +1,29 @@
+{
+  "name": "app-tablas-linea-comandos",
+  "version": "1.0.0",
+  "description": "Aplicación que genera tablas de multiplicar usando línea de comandos",
+  "main": "app.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jcarlosj/Node-U-FH.git"
+  },
+  "keywords": [
+    "node"
+  ],
+  "author": "Juan Carlos Jiménez Gutiérrez <jcjimenez29@misena.edu.co>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jcarlosj/Node-U-FH/issues"
+  },
+  "homepage": "https://github.com/jcarlosj/Node-U-FH#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "nodemon": "^1.19.4"
+  }
+}
