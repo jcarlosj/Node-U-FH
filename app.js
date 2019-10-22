@@ -1,13 +1,27 @@
 /** Bases de Node */
-const argvYargs = require( 'yargs' ) .argv,
+const argv = require( 'yargs' )
+                    .command(                   /** Configuracion de comandos en yargs*/
+                        'listar',               /** Nombre del comando */
+                        'Imprime en consola la tabla de multiplicar',       /** Mensaje */
+                        {
+                            base: {             /** Nombre del flag (bandera) */
+                                demand: true,   /** Hace que la bandera sea de uso obligatorio */
+                                alias: 'b'      /** Crea un alias de la bandera establecida (en este caso una abreviación) */
+                            },
+                            limite: {           /** Nombre del flag (bandera) */
+                                alias: 'l',     /** Crea un alias de la bandera establecida (en este caso una abreviación) */
+                                default: 10     /** Valor por defecto en caso de no ser proporcionado */
+                            }
+                        }
+                    ) 
+                    .help()                     /** Genera listado de ayudas */
+                    .argv,
       { crearArchivo } = require( './lib/multiply' );       // Destructuracion {}
 
-let argv = process .argv;
-    // parametro = argv[ 2 ],              
-    // base = parametro .split( '=' )[ 1 ];      // parametro .slit( '=' ) es igual a: [ '--base', '5' ]
-                                              // base es igual a: 5
-console .info( 'argv yargs', argvYargs );
-console .info( 'argv process', argv );
+console .group( 'argv yargs', argv );
+console .info( 'base', argv .base );
+console .info( 'limite', argv .limite );
+console .groupEnd();
 
 // Llama la funcion que retorna una Promesa
 // crearArchivo( base )
