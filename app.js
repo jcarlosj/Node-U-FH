@@ -16,7 +16,7 @@ const argv = require( 'yargs' )
                     ) 
                     .help()                     /** Genera listado de ayudas */
                     .argv,
-      { crearArchivo } = require( './lib/multiply' );       // Destructuracion {}
+      { crearArchivo, listarTabla } = require( './lib/multiply' );       // Destructuracion {}
 
 /** Mensajes Consola */
 console .log( 'argv', argv );
@@ -26,10 +26,14 @@ let comando = argv ._[ 0 ];
 
 switch( comando ) {
     case 'listar': 
-        console .log( 'Listar' );
+        // Llama la funcion que retorna la Promesa
+        listarTabla( argv .base, argv .limite ) 
+            .then( tabla => {
+                console .log( tabla );
+            })
+            .catch( err => console .log( err ) );
         break;
     case 'crear': 
-        console .log( 'Crea archivo con tabla de multiplicar' );
         // Llama la funcion que retorna una Promesa
         crearArchivo( argv .base )
             .then( file => {
