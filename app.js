@@ -19,16 +19,25 @@ const argv = require( 'yargs' )
       { crearArchivo } = require( './lib/multiply' );       // Destructuracion {}
 
 /** Mensajes Consola */
-console .group( 'argv yargs', argv );
-console .info( ' > base', argv .base );
-console .info( ' > b', argv .b );
-console .info( ' > limite', argv .limite );
-console .info( ' > l', argv .l );
-console .groupEnd();
+console .log( 'argv', argv );
 
-// Llama la funcion que retorna una Promesa
-// crearArchivo( base )
-//     .then( file => {
-//         console .log( `El archivo ${ file } a sido creado y guardado!` );
-//     })
-//     .catch( err => console .log( err) );
+/** Crea opciones de comandos validos */
+let comando = argv ._[ 0 ];
+
+switch( comando ) {
+    case 'listar': 
+        console .log( 'Listar' );
+        break;
+    case 'crear': 
+        console .log( 'Crea archivo con tabla de multiplicar' );
+        // Llama la funcion que retorna una Promesa
+        crearArchivo( argv .base )
+            .then( file => {
+                console .log( `El archivo ${ file } a sido creado y guardado!` );
+            })
+            .catch( err => console .log( err) );
+        break;
+    default: 
+        console .log( 'Comando no reconocido' );
+        break;    
+}
