@@ -26,12 +26,7 @@ let comando = argv ._[ 0 ];
 
 switch( comando ) {
     case 'listar': 
-        // Llama la funcion que retorna la Promesa
-        listarTabla( argv .base, argv .limite ) 
-            .then( tabla => {
-                console .log( tabla );
-            })
-            .catch( err => console .log( err ) );
+        console .log( listarTabla( argv .base, argv .limite ) );
         break;
     case 'crear': 
         // Llama la funcion que retorna una Promesa
